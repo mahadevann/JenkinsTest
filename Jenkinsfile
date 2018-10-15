@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'mahadevann/myenv:test1' } }
+    agent { docker { image 'selenium/standalone-chrome:3.4.0' } }
     stages {
         stage('build') {
             steps {
