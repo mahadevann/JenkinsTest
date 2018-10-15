@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh '''python --version
+                sh '''
+		docker run -d -p 4444:4444 selenium/standalone-chrome:3.4.0
+		python --version
 		behave
 		'''
             }
