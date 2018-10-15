@@ -1,5 +1,5 @@
 pipeline {
-    node { docker { image 'mahadevann/myenv:test1' }
+    agent { docker { image 'mahadevann/myenv:test1' }
 	
 	  }
     stages {
