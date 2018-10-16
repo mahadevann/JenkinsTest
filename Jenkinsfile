@@ -7,7 +7,8 @@ def containertest='conatinertest-${BUILD_NUMBER}'
    
 pipeline {
   
-   agent any
+   agent { docker{ image 'mahadevann/myen:test1'}
+         }
 
    stages{
 
