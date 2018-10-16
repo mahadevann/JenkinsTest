@@ -14,7 +14,7 @@ pipeline {
       stage('Run Test') {
          steps{
             sh '''
-            python --version
+            python3 --version
             behave
             '''
          }
