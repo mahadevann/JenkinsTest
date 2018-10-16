@@ -23,8 +23,6 @@ pipeline {
                Python --version
                behave
                '''
-               
-            ) 
          }
       }
       stage('Tearing Down Selenium Grid') {
