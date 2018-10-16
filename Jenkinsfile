@@ -16,24 +16,15 @@ pipeline {
             sh "docker run -d -p 4444:4444 --name ${seleniumHub} --network ${network} selenium/hub"
             sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${chrome} selenium/node-chrome"
             sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${firefox} selenium/node-firefox"
+            sh "docker run -t -d mahadevann/myenv:test1"
          }
       }
       stage('Run Test') {
          steps{
-            parallel(
-               "search-module":{
-                  // a directory 'search' is created for container test-output
-                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=firefox -e MODULE=search-module.xml -v ${WORKSPACE}/search:/usr/share/tag/test-output --network ${network} vinsdocker/containertest"
-                  //archive all the files under 'search' directory
-                  archiveArtifacts artifacts: 'search/**', fingerprint: true
-               },
-               "order-module":{
-                  // a directory 'order' is created for container test-output
-                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=order-module.xml -v ${WORKSPACE}/order:/usr/share/tag/test-output  --network ${network} vinsdocker/containertest"
-                  //archive all the files under 'order' directory
-                  archiveArtifacts artifacts: 'order/**', fingerprint: true
-               }               
-            ) 
+            sh '''
+            python --version
+            behave
+            '''
          }
       }
       stage('Tearing Down Selenium Grid') {
