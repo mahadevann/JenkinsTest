@@ -14,6 +14,7 @@ pipeline {
       
       stage('Setting Up Selenium Grid') {
          agent { docker { 
+               label 'docker'
                image 'mahadevann/myenv:test1' 
                   } 
          }
