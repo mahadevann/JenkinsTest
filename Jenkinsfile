@@ -7,13 +7,20 @@ def containertest='conatinertest-${BUILD_NUMBER}'
    
 pipeline {
   
-   agent { docker { 
+   agent {
+      label 'docker' 
+   }
+
+   stages{
+      
+      stage('Def docker') {
+            agent { docker { 
                image 'mahadevann/myenv:test1' 
                label 'docker'
                   } 
          }
-
-   stages{
+      }
+      
       stage('Setting Up Selenium Grid') {
          steps{        
             sh "docker network create ${network}"
