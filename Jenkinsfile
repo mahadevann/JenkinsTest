@@ -12,16 +12,14 @@ pipeline {
    }
 
    stages{
+
       
-      stage('Def docker') {
-            agent { docker { 
+      stage('Setting Up Selenium Grid') {
+         agent { docker { 
                image 'mahadevann/myenv:test1' 
                label 'docker'
                   } 
          }
-      }
-      
-      stage('Setting Up Selenium Grid') {
          steps{        
             sh "docker network create ${network}"
             sh "docker run -d -p 4444:4444 --name ${seleniumHub} --network ${network} selenium/hub"
