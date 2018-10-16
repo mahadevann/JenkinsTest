@@ -1,13 +1,8 @@
-//variables
-def network='jenkins-${BUILD_NUMBER}'
-def seleniumHub='selenium-hub-${BUILD_NUMBER}'
-def chrome='chrome-${BUILD_NUMBER}'
-def firefox='firefox-${BUILD_NUMBER}'
-def containertest='conatinertest-${BUILD_NUMBER}'
+
    
 pipeline {
   
-   agent { docker{ image 'mahadevann/myenv:test1'}
+   agent { docker{ image 'mahadevann/mytestenv:test1'}
          }
 
    stages{
@@ -19,15 +14,6 @@ pipeline {
             behave
             '''
          }
-      }
-      stage('Tearing Down Selenium Grid') {
-          steps {
-             //remove all the containers and volumes
-             sh "docker rm -vf ${chrome}"
-             sh "docker rm -vf ${firefox}"
-             sh "docker rm -vf ${seleniumHub}"
-             sh "docker network rm ${network}"
-          }
-        }   
+      }   
    }
 }
