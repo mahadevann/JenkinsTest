@@ -17,7 +17,6 @@ pipeline {
          steps{
             sh '''
             python3 --version
-            curl -v 127.0.0.1:4444/info
             behave
             '''
          }
