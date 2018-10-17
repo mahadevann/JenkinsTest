@@ -18,6 +18,9 @@ pipeline {
       }
 
       stage('Run Test') {
+         agent{
+            docker {image 'mahadevann/myenv:test1'}
+         }
          steps{
             sh '''
             python3 --version
