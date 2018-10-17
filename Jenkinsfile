@@ -17,7 +17,7 @@ pipeline {
          steps{
             sh '''
             python3 --version
-            behave
+            behave -f allure_behave.formatter:AllureFormatter -o %allure_result_folder% ./features
             '''
          }
       }   
